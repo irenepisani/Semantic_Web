@@ -8,7 +8,7 @@ Academic year 2021/22
 
 The main aim of the project was to implement a **narrative domain application ontology**.
 
-
+`Pisani_SW_Project.owl` contains the ontology written in **OWL 2 DL** using **RDF Turtle notation** and developed with the Protege framework. 
 
 OWL Ontology
 The fundamental concepts in an application domain related to narratives (intended as stories about a specific topic) are: events, characters, objects and locations. Some of the facts that characterise this domain can be stated as follows:
