@@ -26,7 +26,7 @@ Reference file:`Pisani_SW_Project.owl`
 
 ### Reasoning
 
-Some aspects need to enable reasoning over the given ontology have also been explored. \
+Some aspects needed to enable reasoning over the given ontology have also been explored. \
 First of all, the **consistency** of the ontology was checked in order to derive implicit knowledge correctly and some **complex roles inclusion axioms** were added to the ontology. \
 Then, the axiom closure of the ontology was analysed to check whether it satisfies the **global restrictions** necessary to obtain a decidable language and, finally, the ontology content was explored via **SPARQL queries**.  
 
