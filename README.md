@@ -1,5 +1,5 @@
-University of Pisa, UNIPI \\
-M.Sc. Computer science, Artificial Intelligence /
+University of Pisa, UNIPI \
+M.Sc. Computer science, Artificial Intelligence \
 
 Academic year 2021/22
 Date: April 2022
