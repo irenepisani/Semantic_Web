@@ -6,7 +6,7 @@ Academic year 2021/22
 
 ###### Final Exam Project for Semantic Web course
 
-The main aim of the project was to implement an **ontology for narrative domain application**. \
+The main aim of the project was to implement an **ontology for Narrative Domain Application**. \
 The [ontology](Pisani_SW_Project.owl) written in **OWL 2 DL** using **RDF Turtle notation** was developed with the [Protege Framework](https://protege.stanford.edu/) and some types of reasoning were performed over it.
 
 Project Delivery: `Exam04-2022.pdf` 
