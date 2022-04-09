@@ -6,9 +6,10 @@ Academic year 2021/22
 
 ###### Final Exam Project for Semantic Web course
 
-The main aim of the project was to implement a **narrative domain application ontology**.
+The main aim of the project was to implement an **ontology for narrative domain application**.
 
 `Pisani_SW_Project.owl` contains the ontology written in **OWL 2 DL** using **RDF Turtle notation** and developed with the Protege framework. 
+[Contribution guidelines for this project](Pisani_SW_Project.owl)
 
 OWL Ontology
 The fundamental concepts in an application domain related to narratives (intended as stories about a specific topic) are: events, characters, objects and locations. Some of the facts that characterise this domain can be stated as follows:
