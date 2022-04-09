@@ -1,0 +1,757 @@
+@prefix : <http://www.semanticweb.org/narrative-domain-application#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/narrative-domain-application> .
+
+<http://www.semanticweb.org/narrative-domain-application> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/narrative-domain-application#hasComponent
+:hasComponent rdf:type owl:ObjectProperty ;
+              owl:inverseOf :isComponentOf ;
+              rdf:type owl:TransitiveProperty ;
+              rdfs:comment "has Component is super property of: has Narrative and has Event."@en ;
+              rdfs:label "has Component"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#hasContractWith
+:hasContractWith rdf:type owl:ObjectProperty ;
+                 owl:inverseOf :makeContractWith ;
+                 rdfs:domain :Narrator ;
+                 rdfs:range :Publisher ;
+                 owl:propertyChainAxiom ( :hasCreated
+                                          :isNarrativeOf
+                                          :hasPublisher
+                                        ) ;
+                 rdfs:comment "has Contract with relates a narrator to the publishers with whom it has a contract."@en ;
+                 rdfs:label "has Contract With"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#hasCreated
+:hasCreated rdf:type owl:ObjectProperty ;
+            owl:inverseOf :isCreatedBy ;
+            rdfs:domain :Narrator ;
+            rdfs:range :Narrative ;
+            rdfs:comment "has Created relates a narrators to the narrative he has created."@en ;
+            rdfs:label "has Created"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#hasEvent
+:hasEvent rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :hasComponent ;
+          owl:inverseOf :isEventOf ;
+          rdf:type owl:InverseFunctionalProperty ;
+          rdfs:domain :Narrative ;
+          rdfs:range :Event ;
+          owl:propertyDisjointWith :hasNarrative ;
+          rdfs:comment "has Event is sub property of has Component and it relates a narrative to events that compose it."@en ;
+          rdfs:label "has Event"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#hasLocation
+:hasLocation rdf:type owl:ObjectProperty ;
+             owl:inverseOf :isLocationOf ;
+             rdf:type owl:FunctionalProperty ;
+             rdfs:domain :Event ;
+             rdfs:range :Location ;
+             rdfs:comment "has Location relates an event to a location where it occurs."@en ;
+             rdfs:label "has Location"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#hasNarrative
+:hasNarrative rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :hasComponent ;
+              owl:inverseOf :isNarrativeOf ;
+              rdf:type owl:InverseFunctionalProperty ;
+              rdfs:domain :Book ;
+              rdfs:range :Narrative ;
+              rdfs:comment "has Narrative is sub property of has Component and it relates a book to narratives it reports."@en ;
+              rdfs:label "has Narrative"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#hasPartecipant
+:hasPartecipant rdf:type owl:ObjectProperty ;
+                owl:inverseOf :isPartecipantOf ;
+                rdfs:comment "has Partecipant is super property of: has Partecipant Object and has Partecipant Character."@en ;
+                rdfs:label "has Partecipant"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#hasPartecipantCharacter
+:hasPartecipantCharacter rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf :hasPartecipant ;
+                         owl:inverseOf :isPartecipantCharacterOf ;
+                         rdfs:domain :Event ;
+                         rdfs:range :Character ;
+                         owl:propertyDisjointWith :hasPartecipantObject ;
+                         rdfs:comment "has Partecipant Character is sub property of has Partecipant and it relates an events to character that partecipate in that event."@en ;
+                         rdfs:label "has Partecipant Character"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#hasPartecipantObject
+:hasPartecipantObject rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf :hasPartecipant ;
+                      owl:inverseOf :isPartecipantObjectOf ;
+                      rdfs:domain :Event ;
+                      rdfs:range :Object ;
+                      rdfs:comment "has Partecipant Object is sub property of has Partecipant and it relates an events to object that partecipate in that event."@en ;
+                      rdfs:label "has Partecipant Object"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#hasPublished
+:hasPublished rdf:type owl:ObjectProperty ;
+              owl:inverseOf :hasPublisher ;
+              rdf:type owl:InverseFunctionalProperty ;
+              rdfs:domain :Publisher ;
+              rdfs:range :Book ;
+              rdfs:comment "has Published relates a publisher to books it has published."@en ;
+              rdfs:label "has Published"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#hasPublisher
+:hasPublisher rdf:type owl:ObjectProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain :Book ;
+              rdfs:range :Publisher ;
+              rdfs:comment "has Publisher relates a books to the publishers who published it."@en ;
+              rdfs:label "has Publisher"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#isComponentOf
+:isComponentOf rdf:type owl:ObjectProperty ,
+                        owl:TransitiveProperty ;
+               rdfs:comment "is Component Of is super property of: is Narrative Of and is Event Of."@en ;
+               rdfs:label "is Component Of"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#isCreatedBy
+:isCreatedBy rdf:type owl:ObjectProperty ;
+             rdfs:domain :Narrative ;
+             rdfs:range :Narrator ;
+             rdfs:comment "is Created By relates a narrative to narrators who has created it."@en ;
+             rdfs:label "is Created By"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#isEventOf
+:isEventOf rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :isComponentOf ;
+           rdf:type owl:FunctionalProperty ;
+           rdfs:domain :Event ;
+           rdfs:range :Narrative ;
+           owl:propertyDisjointWith :isNarrativeOf ;
+           rdfs:comment "is Event  Of is sub property of is Component Of and it relates a event to the narratives it composes."@en ;
+           rdfs:label "is Event Of"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#isLocationOf
+:isLocationOf rdf:type owl:ObjectProperty ,
+                       owl:InverseFunctionalProperty ;
+              rdfs:domain :Location ;
+              rdfs:range :Event ;
+              rdfs:comment "is Location Of relates a location to events occurring in that location."@en ;
+              rdfs:label "is Location Of"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#isNarrativeOf
+:isNarrativeOf rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :isComponentOf ;
+               rdf:type owl:FunctionalProperty ;
+               rdfs:domain :Narrative ;
+               rdfs:range :Book ;
+               rdfs:comment "is Narrative Of is sub property of is Component Of and it relates a narrative to the book that reports it."@en ;
+               rdfs:label "is Narrative Of"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#isPartecipantCharacterOf
+:isPartecipantCharacterOf rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf :isPartecipantOf ;
+                          rdfs:domain :Character ;
+                          rdfs:range :Event ;
+                          owl:propertyDisjointWith :isPartecipantObjectOf ;
+                          rdfs:comment "is Partecipant Character Of is sub property of is Partecipant Of and it relates a characters to events for which it is a partecipant."@en ;
+                          rdfs:label "is Partecipant Character Of"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#isPartecipantObjectOf
+:isPartecipantObjectOf rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf :isPartecipantOf ;
+                       rdfs:domain :Object ;
+                       rdfs:range :Event ;
+                       rdfs:comment "is Partecipant Object Of is sub property of is Partecipant Of and it relates an object to events for which it is a partecipant."@en ;
+                       rdfs:label "is Partecipant Object Of"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#isPartecipantOf
+:isPartecipantOf rdf:type owl:ObjectProperty ;
+                 rdfs:comment "is Partecipant of is super property of: is Character Partecipant Of and is Object Partecipant Of."@en ;
+                 rdfs:label "is Partecipant Of"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#makeContractWith
+:makeContractWith rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Publisher ;
+                  rdfs:range :Narrator ;
+                  rdfs:comment "make Contract With relates a publisher to narrators they have contracted with."@en ;
+                  rdfs:label "make Contract With"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/narrative-domain-application#hasCharacterName
+:hasCharacterName rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf :hasName ;
+                  rdf:type owl:FunctionalProperty ;
+                  rdfs:domain :Character ;
+                  rdfs:range xsd:string ;
+                  owl:propertyDisjointWith :hasLocationName ,
+                                           :hasObjectName ,
+                                           :hasPublisherName ;
+                  rdfs:comment "has Character Name relates a characters to its own name (represented as string)."@en ;
+                  rdfs:label "has Character Name"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#hasID
+:hasID rdf:type owl:DatatypeProperty ,
+                owl:FunctionalProperty ;
+       rdfs:domain :Publisher ;
+       rdfs:range xsd:positiveInteger ;
+       owl:propertyDisjointWith :hasISBNCode ,
+                                :hasName ,
+                                :hasTitle ;
+       rdfs:comment "has ID relates books with their own ID represented by positive integer."@en ;
+       rdfs:label "has ID"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#hasISBNCode
+:hasISBNCode rdf:type owl:DatatypeProperty ,
+                      owl:FunctionalProperty ;
+             rdfs:domain :Book ;
+             rdfs:range xsd:string ;
+             owl:propertyDisjointWith :hasName ,
+                                      :hasTitle ;
+             rdfs:comment "has ISBN Code relates books with their own ISBN code represented by a string."@en ;
+             rdfs:label "has ISBN Code"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#hasLocationName
+:hasLocationName rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf :hasName ;
+                 rdf:type owl:FunctionalProperty ;
+                 rdfs:domain :Location ;
+                 rdfs:range xsd:string ;
+                 owl:propertyDisjointWith :hasObjectName ,
+                                          :hasPublisherName ;
+                 rdfs:comment "has Location Name relates a location to its own name (represented as string)."@en ;
+                 rdfs:label "has Location Name"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#hasName
+:hasName rdf:type owl:DatatypeProperty ;
+         owl:propertyDisjointWith :hasTitle ;
+         rdfs:comment "has Name relates individuals of a given class to their own name represented as string."@en ;
+         rdfs:label "has Name"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#hasObjectName
+:hasObjectName rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf :hasName ;
+               rdf:type owl:FunctionalProperty ;
+               rdfs:domain :Object ;
+               rdfs:range xsd:string ;
+               owl:propertyDisjointWith :hasPublisherName ;
+               rdfs:comment "has Object Name relates an object to its own name (represented as string)."@en ;
+               rdfs:label "has Object Name"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#hasPublisherName
+:hasPublisherName rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf :hasName ;
+                  rdf:type owl:FunctionalProperty ;
+                  rdfs:domain :Publisher ;
+                  rdfs:range xsd:string ;
+                  rdfs:comment "has Publisher Name relates a publisher to its own name (represented as string)."@en ;
+                  rdfs:label "has Publisher Name"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#hasTitle
+:hasTitle rdf:type owl:DatatypeProperty ,
+                   owl:FunctionalProperty ;
+          rdfs:domain :Book ;
+          rdfs:range xsd:string ;
+          rdfs:comment "has Title relates books with their own title represented by a string."@en ;
+          rdfs:label "has Title"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/narrative-domain-application#Book
+:Book rdf:type owl:Class ;
+      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                        owl:onProperty :hasNarrative ;
+                        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onClass :Narrative
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :hasPublisher ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onClass :Publisher
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :hasISBNCode ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onDataRange xsd:string
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :hasTitle ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onDataRange xsd:string
+                      ] ;
+      owl:disjointWith :Bookshop ,
+                       :Character ,
+                       :Event ,
+                       :Location ,
+                       :Narrative ,
+                       :Narrator ,
+                       :Object ,
+                       :Publisher ;
+      rdfs:comment "A book reports one or more narrative, it has a title and an ISBN code and has exactly one publisher."@en ;
+      rdfs:label "Book"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#Bookshop
+:Bookshop rdf:type owl:Class ;
+          owl:disjointWith :Character ,
+                           :Event ,
+                           :Location ,
+                           :Narrative ,
+                           :Narrator ,
+                           :Object ,
+                           :Publisher ;
+          rdfs:comment "A bookshop is a shop that sells books."@en ;
+          rdfs:label "Bookshop"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#Character
+:Character rdf:type owl:Class ;
+           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasCharacterName ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onDataRange xsd:string
+                           ] ;
+           owl:disjointWith :Event ,
+                            :Location ,
+                            :Narrative ,
+                            :Narrator ,
+                            :Object ,
+                            :Publisher ;
+           owl:disjointUnionOf ( :Human
+                                 :NotHuman
+                               ) ;
+           rdfs:comment "A character can be human or not human, it has a name and it partecipates to an event."@en ;
+           rdfs:label "Character"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#Event
+:Event rdf:type owl:Class ;
+       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasPartecipantCharacter ;
+                         owl:allValuesFrom :Character
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasPartecipantObject ;
+                         owl:allValuesFrom :Object
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasPartecipant ;
+                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onClass [ rdf:type owl:Class ;
+                                       owl:unionOf ( :Character
+                                                     :Object
+                                                   )
+                                     ]
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasLocation ;
+                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onClass :Location
+                       ] ;
+       owl:disjointWith :Location ,
+                        :Narrative ,
+                        :Narrator ,
+                        :Object ,
+                        :Publisher ;
+       rdfs:comment "A event is narrative event that occur in exactlly one location."@en ;
+       rdfs:label "Event"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#FictionalLocation
+:FictionalLocation rdf:type owl:Class ;
+                   rdfs:subClassOf :Location ;
+                   owl:disjointWith :RealLocation ;
+                   rdfs:comment "A fictional location is a location used in event that is invented, not real."@en ;
+                   rdfs:label "Fictional Location"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#Human
+:Human rdf:type owl:Class ;
+       rdfs:subClassOf :Character ;
+       owl:disjointWith :NotHuman ;
+       rdfs:comment "A human character is character with human features."@en ;
+       rdfs:label "Human Characters"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#Location
+:Location rdf:type owl:Class ;
+          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasLocationName ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onDataRange xsd:string
+                          ] ;
+          owl:disjointWith :Narrative ,
+                           :Narrator ,
+                           :Object ,
+                           :Publisher ;
+          owl:disjointUnionOf ( :FictionalLocation
+                                :RealLocation
+                              ) ;
+          rdfs:comment "A location can be real or fictional, it has a name and it is a place where a narrative event happens."@en ;
+          rdfs:label "Location"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#Narrative
+:Narrative rdf:type owl:Class ;
+           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasEvent ;
+                             owl:allValuesFrom :Event
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasEvent ;
+                             owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass :Event
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :isCreatedBy ;
+                             owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass :Narrator
+                           ] ;
+           owl:disjointWith :Narrator ,
+                            :Object ,
+                            :Publisher ;
+           rdfs:comment "A narrative is composed (exclusive) of one or more event, it is created by a narrator and it is reported in a book."@en ;
+           rdfs:label "Narrative"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#Narrator
+:Narrator rdf:type owl:Class ;
+          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasContractWith ;
+                            owl:allValuesFrom :Publisher
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasContractWith ;
+                            owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Publisher
+                          ] ;
+          owl:disjointWith :Object ,
+                           :Publisher ;
+          rdfs:comment "A narrator creates narratives and has at least one contract with a publisher."@en ;
+          rdfs:label "Narrator"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#NotHuman
+:NotHuman rdf:type owl:Class ;
+          rdfs:subClassOf :Character ;
+          rdfs:comment "A not human character is a character with non-human features."@en ;
+          rdfs:label "Not Human Characters"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#Object
+:Object rdf:type owl:Class ;
+        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasObjectName ;
+                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onDataRange xsd:string
+                        ] ;
+        owl:disjointWith :Publisher ;
+        rdfs:comment "An object has a name and partecipated into an event."@en ;
+        rdfs:label "Object"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#Organization
+:Organization rdf:type owl:Class ;
+              rdfs:comment "An organization (example: Publisher is an organization)."@en ;
+              rdfs:label "Organization"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#Publisher
+:Publisher rdf:type owl:Class ;
+           rdfs:subClassOf :Organization ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasPublished ;
+                             owl:someValuesFrom :Book
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasPublished ;
+                             owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                             owl:onClass :Book
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasID ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onDataRange xsd:positiveInteger
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasPublisherName ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onDataRange xsd:string
+                           ] ;
+           rdfs:comment "A publisher is an organization identified by a name and an ID, it publishes more then one book and it makes contract with some narrators."@en ;
+           rdfs:label "Publisher"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#RealLocation
+:RealLocation rdf:type owl:Class ;
+              rdfs:subClassOf :Location ;
+              rdfs:comment "A real location is a location used in event that is real, not invented."@en ;
+              rdfs:label "Real Location"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/narrative-domain-application#CaptainHook
+:CaptainHook rdf:type owl:NamedIndividual ,
+                      :Human ;
+             :isPartecipantCharacterOf :PeterPanDefeatsCaptainHook ;
+             :hasCharacterName "Captain Hook"^^xsd:string ;
+             rdfs:label "Captain Hook"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#DisneyHistory
+:DisneyHistory rdf:type owl:NamedIndividual ,
+                        :Book ;
+               :hasNarrative :PeterPanHistory ,
+                             :PocahontasHistory ;
+               :hasPublisher :Feltrinelli ;
+               :hasISBNCode "1010"^^xsd:string ;
+               :hasTitle "Disney History"^^xsd:string ;
+               rdfs:label "Disney History"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#FakeDeathOfMattiaPascal
+:FakeDeathOfMattiaPascal rdf:type owl:NamedIndividual ,
+                                  :Event ;
+                         :hasLocation :Italy ;
+                         :hasPartecipantCharacter :MattiaPascal ;
+                         :isEventOf :NarrativeOfMattiaPascal ;
+                         rdfs:label "Fake death of Mattia Pascal" .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#Feltrinelli
+:Feltrinelli rdf:type owl:NamedIndividual ,
+                      :Publisher ;
+             :makeContractWith :MarioRossi ;
+             :hasID "200"^^xsd:positiveInteger ;
+             :hasPublisherName "Feltrinelli"^^xsd:string .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#FeltrinelliPisa
+:FeltrinelliPisa rdf:type owl:NamedIndividual ,
+                          :Bookshop .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#GiovanniVerdi
+:GiovanniVerdi rdf:type owl:NamedIndividual ,
+                        :Narrator ;
+               :hasContractWith :Feltrinelli ;
+               :hasCreated :PeterPanHistory .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#Hook
+:Hook rdf:type owl:NamedIndividual ,
+               :Object ;
+      :hasObjectName "Hook"^^xsd:string .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#IlFuMattiaPascal
+:IlFuMattiaPascal rdf:type owl:NamedIndividual ,
+                           :Book ;
+                  :hasNarrative :NarrativeOfMattiaPascal ;
+                  :hasPublisher :Mondadori ;
+                  :hasISBNCode "2020"^^xsd:string ;
+                  :hasTitle "Il fu Mattia Pascal"^^xsd:string ;
+                  rdfs:label "Il fu Mattia Pascal"^^xsd:string .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#Italy
+:Italy rdf:type owl:NamedIndividual ,
+                :RealLocation ;
+       :isLocationOf :FakeDeathOfMattiaPascal ;
+       :hasLocationName "Italy"^^xsd:string .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#JohnSmith
+:JohnSmith rdf:type owl:NamedIndividual ,
+                    :Human ;
+           :isPartecipantCharacterOf :PocahontasMeetJohnSmith ;
+           :hasCharacterName "John Smith"^^xsd:string .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#London
+:London rdf:type owl:NamedIndividual ,
+                 :RealLocation ;
+        :hasLocationName "London"^^xsd:string .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#LuigiPirandello
+:LuigiPirandello rdf:type owl:NamedIndividual ,
+                          :Narrator ;
+                 :hasCreated :NarrativeOfMattiaPascal .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#MagicPowder
+:MagicPowder rdf:type owl:NamedIndividual ,
+                      :Object ;
+             :isPartecipantObjectOf :TrilliCreateMagicPowder ;
+             :hasObjectName "Magic Powder"^^xsd:string .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#MarioRossi
+:MarioRossi rdf:type owl:NamedIndividual ,
+                     :Narrator ;
+            :hasCreated :PocahontasHistory .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#MattiaPascal
+:MattiaPascal rdf:type owl:NamedIndividual ,
+                       :Human ;
+              :isPartecipantCharacterOf :FakeDeathOfMattiaPascal ;
+              :hasCharacterName "Mattia Pascal"^^xsd:string .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#Mondadori
+:Mondadori rdf:type owl:NamedIndividual ,
+                    :Publisher ;
+           :hasPublished :IlFuMattiaPascal ;
+           :makeContractWith :LuigiPirandello ;
+           :hasID "300"^^xsd:positiveInteger ;
+           :hasPublisherName "Mondadori"^^xsd:string .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#NarrativeOfMattiaPascal
+:NarrativeOfMattiaPascal rdf:type owl:NamedIndividual ,
+                                  :Narrative ;
+                         :hasEvent :FakeDeathOfMattiaPascal ;
+                         :isCreatedBy :LuigiPirandello ;
+                         :isNarrativeOf :IlFuMattiaPascal .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#Neverland
+:Neverland rdf:type owl:NamedIndividual ,
+                    :FictionalLocation ;
+           :isLocationOf :PeterPanDefeatsCaptainHook ;
+           :hasLocationName "Neverland"^^xsd:string .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#PeterPan
+:PeterPan rdf:type owl:NamedIndividual ,
+                   :Human ;
+          :isPartecipantCharacterOf :PeterPanMeetWendy ;
+          :hasCharacterName "Peter Pan"^^xsd:string .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#PeterPanDefeatsCaptainHook
+:PeterPanDefeatsCaptainHook rdf:type owl:NamedIndividual ,
+                                     :Event ;
+                            :hasLocation :Neverland ;
+                            :hasPartecipantCharacter :CaptainHook ,
+                                                     :PeterPan ;
+                            :hasPartecipantObject :Hook ;
+                            :isEventOf :PeterPanHistory ;
+                            rdfs:label "Peter Pan Defeats Captain Hook" .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#PeterPanHistory
+:PeterPanHistory rdf:type owl:NamedIndividual ,
+                          :Narrative ;
+                 :hasEvent :PeterPanMeetWendy ,
+                           :TrilliCreateMagicPowder ;
+                 :isCreatedBy :GiovanniVerdi .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#PeterPanMeetWendy
+:PeterPanMeetWendy rdf:type owl:NamedIndividual ,
+                            :Event ;
+                   :hasLocation :London ;
+                   :hasPartecipantCharacter :PeterPan ,
+                                            :Wendy ;
+                   :isEventOf :PeterPanHistory ;
+                   rdfs:label "Peter Pan Meets Wendy" .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#Pocahontas
+:Pocahontas rdf:type owl:NamedIndividual ,
+                     :Human ;
+            :isPartecipantCharacterOf :PocahontasMeetJohnSmith ;
+            :hasCharacterName "Pocahontas"^^xsd:string .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#PocahontasHistory
+:PocahontasHistory rdf:type owl:NamedIndividual ,
+                            :Narrative ;
+                   :hasEvent :PocahontasMeetJohnSmith ;
+                   :isNarrativeOf :DisneyHistory .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#PocahontasMeetJohnSmith
+:PocahontasMeetJohnSmith rdf:type owl:NamedIndividual ,
+                                  :Event ;
+                         :hasLocation :Virginia ;
+                         :hasPartecipantCharacter :JohnSmith ,
+                                                  :Pocahontas ;
+                         :isEventOf :PocahontasHistory ;
+                         rdfs:label "Pochaontas meets John Smith" .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#Trilli
+:Trilli rdf:type owl:NamedIndividual ,
+                 :NotHuman ;
+        :isPartecipantCharacterOf :TrilliCreateMagicPowder ;
+        :hasCharacterName "Trilli"^^xsd:string .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#TrilliCreateMagicPowder
+:TrilliCreateMagicPowder rdf:type owl:NamedIndividual ,
+                                  :Event ;
+                         :hasLocation :Neverland ;
+                         :hasPartecipantCharacter :Trilli ;
+                         :hasPartecipantObject :MagicPowder ;
+                         rdfs:label "Trilli create magic powder" .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#Virginia
+:Virginia rdf:type owl:NamedIndividual ,
+                   :RealLocation ;
+          :isLocationOf :PocahontasMeetJohnSmith ;
+          :hasLocationName "Virginia"^^xsd:string ;
+          rdfs:label "Virginia (America)"@en .
+
+
+###  http://www.semanticweb.org/narrative-domain-application#Wendy
+:Wendy rdf:type owl:NamedIndividual ,
+                :Human ;
+       :isPartecipantCharacterOf :PeterPanMeetWendy ;
+       :hasCharacterName "Wendy"^^xsd:string .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
