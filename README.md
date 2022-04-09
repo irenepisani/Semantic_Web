@@ -6,6 +6,8 @@ Academic year 2021/22
 
 ###### Final Exam Project for Semantic Web course
 
+The main aim of the project was to implement a **narrative domain application ontology**.
+
 
 
 OWL Ontology
