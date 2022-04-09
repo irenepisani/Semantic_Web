@@ -13,7 +13,7 @@ Project Delivery: `Exam04-2022.pdf`
 
 ### Knowledge Representation
 
-Given the applicatino domain, all the required **Classes**, **Data Properties** and **Object Properties** have been declared, providing:
+Given the application domain, all the required **Classes**, **Data Properties** and **Object Properties** have been declared providing:
 - a textual label and a textual description of the intension of the property, using the appropriate annotation property from the RDFS vocabulary;
 - axioms defining domain, range and inverse of the property; 
 - any additional axioms expressing disjointness of the property with other properties, and the property characteristics;
