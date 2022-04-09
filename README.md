@@ -4,7 +4,7 @@ Academic year 2021/22
 
 # Semantic Web
 
-###### Final Exam Project for Semantic Web course
+###### Final Exam Project for Semantic Web course (Prof. Valentina Lenzi Bartalesi)
 
 The main aim of the project was to implement an **ontology for Narrative Domain Application**. \
 The [ontology](Pisani_SW_Project.owl) written in **OWL 2 DL** using **RDF Turtle notation** was developed with the [Protege Framework](https://protege.stanford.edu/) and some types of reasoning were performed over it.
