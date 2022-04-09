@@ -1,11 +1,10 @@
-###### University of Pisa, UNIPI \
-###### M.Sc. Computer science, Artificial Intelligence \
-###### Academic year 2021/22
-###### Date: April 2022
-
+University of Pisa, UNIPI \
+M.Sc. Computer science, Artificial Intelligence \
+Academic year 2021/22 \
 
 # Semantic Web
-##### Final Project 
+
+##### Final Exam Project for Semantic Web course
 
 
 
